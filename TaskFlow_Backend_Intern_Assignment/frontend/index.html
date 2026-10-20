@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaskFlow | Personal task manager</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#"><span class="brand-mark">T</span> taskflow</a>
+      <span class="api-status" id="apiStatus">Checking API…</span>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">TaskFlow workspace</p>
+      <h1>Tasks, in one place.</h1>
+      <p class="intro">Keep track of what needs doing.</p>
+    </section>
+
+    <section id="authPanel" class="auth-grid">
+      <div class="panel auth-card">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Welcome back</p><h2>Log in</h2></div>
+        </div>
+        <form id="loginForm">
+          <label>Email<input type="email" id="loginEmail" required autocomplete="email" placeholder="you@example.com"></label>
+          <label>Password<input type="password" id="loginPassword" required autocomplete="current-password" placeholder="Your password"></label>
+          <button class="primary" type="submit">Log in <span>→</span></button>
+        </form>
+      </div>
+      <div class="panel auth-card signup-card">
+        <div class="panel-heading">
+          <div><p class="eyebrow">New around here?</p><h2>Create account</h2></div>
+        </div>
+        <form id="registerForm">
+          <label>Your name<input type="text" id="registerName" required minlength="2" maxlength="80" autocomplete="name" placeholder="Your name"></label>
+          <label>Email<input type="email" id="registerEmail" required autocomplete="email" placeholder="you@example.com"></label>
+          <label>Password<input type="password" id="registerPassword" required minlength="8" maxlength="128" autocomplete="new-password" placeholder="At least 8 characters"></label>
+          <button class="primary" type="submit">Create account <span>→</span></button>
+        </form>
+      </div>
+    </section>
+
+    <section id="appPanel" class="dashboard hidden">
+      <div class="dashboard-heading">
+        <div><p class="eyebrow">Your workspace</p><h2>Hey, <span id="userName">there</span>.</h2><p class="muted" id="userMeta"></p></div>
+        <button id="logoutBtn" class="quiet-button">Log out ↗</button>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><span>Total tasks</span><strong id="totalCount">0</strong></div>
+        <div class="stat-card"><span>In progress</span><strong id="progressCount">0</strong></div>
+        <div class="stat-card"><span>Completed</span><strong id="doneCount">0</strong></div>
+      </div>
+      <div class="content-grid">
+        <section class="panel create-panel">
+          <p class="eyebrow">Start something</p><h3>Add a task</h3>
+          <form id="taskForm">
+            <label>Task title<input id="taskTitle" required maxlength="120" placeholder="What needs doing?"></label>
+            <label>Notes<textarea id="taskDescription" maxlength="2000" rows="3" placeholder="Add a little context (optional)"></textarea></label>
+            <label>Status<select id="taskStatus"><option value="todo">To do</option><option value="in_progress">In progress</option><option value="done">Done</option></select></label>
+            <button class="primary" type="submit">Add task <span>＋</span></button>
+          </form>
+        </section>
+        <section class="tasks-section">
+          <div class="tasks-heading"><div><p class="eyebrow">Keep your momentum</p><h3>Your tasks</h3></div>
+            <select id="filterStatus" aria-label="Filter tasks"><option value="">All tasks</option><option value="todo">To do</option><option value="in_progress">In progress</option><option value="done">Done</option></select>
+          </div>
+          <div id="taskList" class="task-list"></div>
+          <p id="emptyState" class="empty-state hidden">Nothing here yet. Add a task and get the ball rolling.</p>
+        </section>
+      </div>
+      <section id="adminPanel" class="panel admin-panel hidden"><p class="eyebrow">Admin tools</p><h3>Registered users</h3><button id="loadUsersBtn" class="secondary">Load users</button><div id="userList"></div></section>
+    </section>
+    <div id="toast" role="status" aria-live="polite" class="toast hidden"></div>
+    <footer><span>TaskFlow API</span><span>Built for the everyday to-do list.</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
